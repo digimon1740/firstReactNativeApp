@@ -4,54 +4,50 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
+    Platform,
+    StyleSheet,
+    Text,
+    View,
+    ActivityIndicator,
 } from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
 export default class App extends Component<{}> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
-    );
-  }
+    state = {
+        isLoaded: false
+    }
+
+    render() {
+        const {isLoaded} = this.state;
+        return (
+            <View style={styles.container}>
+                {isLoaded ? null :
+                    <View style={styles.loading}>
+                        <Text style={styles.loadingText}>Getting the fucking weather</Text>
+                    </View>}
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        justifyContent: 'flex-start',
+        alignItems: 'stretch',
+        flexDirection: 'row',
+        flexWrap: 'wrap'
+    },
+    loading: {
+        flex: 1,
+        backgroundColor: '#FDF6AA',
+        justifyContent: 'flex-end',
+        paddingLeft: 25,
+    },
+    loadingText: {
+        fontSize: 38,
+        marginBottom: 100,
+    }
 });
